@@ -1,0 +1,36 @@
+GET  http://localhost:8080
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDc5ODg5NDIsImV4cCI6MTYwNzk4ODk1NywiYXVkIjoiNWZkNTUxZjk4MWY1ZWYzZmZjMGM0M2YxIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.QZo1xp0jOncSAmSQKhWXlHJ4uCRwl9JciLCZ-1kugVU
+
+
+###Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "karol123451231234@gmail.com",
+    "password": "password11"
+}
+
+###Register
+POST http://localhost:8080/auth/register
+Content-Type:application/json
+
+{
+    "email": "karol123451231234@gmail.com",
+    "password": "password11"
+}
+
+###Refresh token
+POST http://localhost:8080/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDc5ODg5MTYsImV4cCI6MTYzOTU0NjUxNiwiYXVkIjoiNWZkNTUxZjk4MWY1ZWYzZmZjMGM0M2YxIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.sn_x5NgJDKEfrktQH-hYZHwMSoejyA9hxhBaLMaxOeE"
+}
+###Logout
+DELETE http://localhost:8080/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDc5ODc5NTksImV4cCI6MTYzOTU0NTU1OSwiYXVkIjoiNWZkNTUxZjk4MWY1ZWYzZmZjMGM0M2YxIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.8WsUoIhPS_Ij7tb-bj0Au0SyfgtiZGYvkLNN4oN9jPM"
+}
