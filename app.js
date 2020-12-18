@@ -7,7 +7,7 @@ require("./helpers/init_redis");
 const { verifyAccessToken } = require("./helpers/jwt_helper");
 const cors = require("cors");
 
-const AuthRoute = require("./Routes/Auth.route");
+const AuthRoute = require("./routes/Auth.route");
 
 const app = express();
 app.use(cors());
