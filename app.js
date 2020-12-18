@@ -6,7 +6,7 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 const { verifyAccessToken } = require("./helpers/jwt_helper");
 
-const AuthRoute = require("./Routes/Auth.route");
+const AuthRoute = require("./routes/Auth.route");
 
 const app = express();
 app.use(morgan("dev"));
