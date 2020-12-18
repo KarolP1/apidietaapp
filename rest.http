@@ -1,13 +1,11 @@
 GET  http://localhost:8080
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDc5ODg5NDIsImV4cCI6MTYwNzk4ODk1NywiYXVkIjoiNWZkNTUxZjk4MWY1ZWYzZmZjMGM0M2YxIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.QZo1xp0jOncSAmSQKhWXlHJ4uCRwl9JciLCZ-1kugVU
-
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODM3NzUsImV4cCI6MTYwODI4Mzc5MCwiYXVkIjoiNWZkYzc2NTFmY2Q5MTM1ODljNTkzYmVjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.FM6ywcdoo3k7sce02O9tzW2a6pt-cVdIsnYneBG-pHw
 ###Login
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "karol123451231234@gmail.com",
+    "email": "karol123451231a234@gmail.com",
     "password": "password11"
 }
 
@@ -16,7 +14,7 @@ POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
-    "email": "karol123451231234@gmail.com",
+    "email": "karol123451231a234@gmail.com",
     "password": "password11"
 }
 
