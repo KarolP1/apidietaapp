@@ -1,7 +1,7 @@
-GET  http://localhost:8080
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODM3NzUsImV4cCI6MTYwODI4Mzc5MCwiYXVkIjoiNWZkYzc2NTFmY2Q5MTM1ODljNTkzYmVjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.FM6ywcdoo3k7sce02O9tzW2a6pt-cVdIsnYneBG-pHw
+GET  https://dietappreact.herokuapp.com/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODYxNTEsImV4cCI6MTYwODI4NjE2NiwiYXVkIjoiNWZkYzdmYzZkNjczNzUwMDE3MmFlZGJjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.IVDbpE_In0M1A-1EoBu4mz1Da8Ej5XzPPtzRG16o4Nw
 ###Login
-POST http://localhost:8080/auth/login
+POST https://dietappreact.herokuapp.com/auth/login
 Content-Type: application/json
 
 {
@@ -10,23 +10,23 @@ Content-Type: application/json
 }
 
 ###Register
-POST http://localhost:8080/auth/register
+POST https://dietappreact.herokuapp.com/auth/register
 Content-Type:application/json
 
 {
-    "email": "karol123451231a234@gmail.com",
+    "email": "test@gmail.com",
     "password": "password11"
 }
 
 ###Refresh token
-POST http://localhost:8080/auth/refresh-token
+POST https://dietappreact.herokuapp.com/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDc5ODg5MTYsImV4cCI6MTYzOTU0NjUxNiwiYXVkIjoiNWZkNTUxZjk4MWY1ZWYzZmZjMGM0M2YxIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.sn_x5NgJDKEfrktQH-hYZHwMSoejyA9hxhBaLMaxOeE"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODYxNTEsImV4cCI6MTYzOTg0Mzc1MSwiYXVkIjoiNWZkYzdmYzZkNjczNzUwMDE3MmFlZGJjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.kxPzWeSTFLMAhqj7zPmSuvac3v7lY4wV2GsiJ2bGzs4"
 }
 ###Logout
-DELETE http://localhost:8080/auth/logout
+DELETE https://dietappreact.herokuapp.com/auth/logout
 Content-Type: application/json
 
 {

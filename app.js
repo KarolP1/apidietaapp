@@ -5,10 +5,12 @@ require("dotenv").config();
 require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 const { verifyAccessToken } = require("./helpers/jwt_helper");
+const cors = require("cors");
 
 const AuthRoute = require("./Routes/Auth.route");
 
 const app = express();
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
