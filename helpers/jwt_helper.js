@@ -59,7 +59,19 @@ module.exports = {
 						console.log(err.message);
 						return reject(createError.InternalServerError());
 					}
-					console.log("token from redis:", token);
+					console.log(
+						"token from redis:",
+						client.GET(userId, (err, response) => {
+							if (err) {
+								console.log(err);
+								reject(createError.InternalServerError());
+							} else {
+								console.log(response);
+							}
+
+							reject(createError.Unauthorized());
+						})
+					);
 					resolve(token);
 				});
 				resolve(token);

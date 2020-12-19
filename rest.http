@@ -1,16 +1,17 @@
 GET  https://dietappreact.herokuapp.com/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODYxNTEsImV4cCI6MTYwODI4NjE2NiwiYXVkIjoiNWZkYzdmYzZkNjczNzUwMDE3MmFlZGJjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.IVDbpE_In0M1A-1EoBu4mz1Da8Ej5XzPPtzRG16o4Nw
 ###Login
-POST https://dietappreact.herokuapp.com/auth/login
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "karol123451231a234@gmail.com",
+    "email": "test@gmail.com",
     "password": "password11"
 }
 
+
 ###Register
-POST https://dietappreact.herokuapp.com/auth/register
+POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
