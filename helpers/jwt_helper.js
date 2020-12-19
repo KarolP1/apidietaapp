@@ -59,6 +59,7 @@ module.exports = {
 						console.log(err.message);
 						return reject(createError.InternalServerError());
 					}
+					console.log("token from redis:", token);
 					resolve(token);
 				});
 				resolve(token);
