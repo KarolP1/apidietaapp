@@ -29,7 +29,7 @@ const register = async (req, res, next) => {
 
 		addToken(user.id, refreshToken);
 
-		res.send({ accessToken, refreshToken });
+		res.send({ accessToken, refreshToken, userId: user.id });
 	} catch (error) {
 		if (error.isJoi === true) error.status = 422;
 		next(error);
