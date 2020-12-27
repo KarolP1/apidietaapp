@@ -60,7 +60,7 @@ const login = async (req, res, next) => {
 			addToken(user.id, refreshToken);
 		}
 
-		res.send({ accessToken, refreshToken, userId });
+		res.send({ accessToken, refreshToken, userId: user.id });
 	} catch (error) {
 		if (error.isJoi)
 			return next(createError.BadRequest("Email lub hasło są nie poprawne"));
