@@ -60,7 +60,7 @@ const login = async (req, res, next) => {
 			addToken(user.id, refreshToken);
 		}
 
-		res.send({ accessToken, refreshToken });
+		res.send({ accessToken, refreshToken, userId });
 	} catch (error) {
 		if (error.isJoi)
 			return next(createError.BadRequest("Email lub hasło są nie poprawne"));
@@ -83,7 +83,7 @@ const refreshToken = async (req, res, next) => {
 			await addToken(userId, refresh);
 		}
 
-		res.send({ accessToken: acces, refreshToken: refresh });
+		res.send({ accessToken: acces, refreshToken: refresh, userId: userId });
 	} catch (err) {
 		next(err);
 	}
