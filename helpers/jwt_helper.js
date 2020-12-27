@@ -1,14 +1,14 @@
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
-const client = require("./init_redis");
+const RefreshToken = require("../Models/RefreshToken.schema");
 
 module.exports = {
 	signAccessToken: (userId) => {
 		return new Promise((resolve, reject) => {
-			const payload = {};
+			const payload = { message: "ok" };
 			const secret = process.env.ACCESS_TOKEN_KEY;
 			const options = {
-				expiresIn: "15s",
+				expiresIn: "10m",
 				issuer: "http://dietanote.netlify.app/",
 				audience: userId,
 			};
@@ -44,7 +44,7 @@ module.exports = {
 			const payload = {};
 			const secret = process.env.REFRESH_TOKEN_KEY;
 			const options = {
-				expiresIn: "1y",
+				expiresIn: "7d",
 				issuer: "http://dietanote.netlify.app/",
 				audience: userId,
 			};
@@ -54,54 +54,31 @@ module.exports = {
 					console.log(err.message);
 					reject(createError.InternalServerError());
 				}
-				client.SET(userId, token, "EX", 365 * 24 * 60 * 60, (err, response) => {
-					if (err) {
-						console.log(err.message);
-						return reject(createError.InternalServerError());
-					}
-					console.log(
-						"token from redis:",
-						client.GET(userId, (err, response) => {
-							if (err) {
-								console.log(err);
-								reject(createError.InternalServerError());
-							} else {
-								console.log(response);
-							}
 
-							reject(createError.Unauthorized());
-						})
-					);
-					resolve(token);
-				});
 				resolve(token);
 			});
 		});
 	},
 	verifyRefreshToken: (refreshToken) => {
-		return new Promise((resolve, reject) => {
+		return new Promise(async (resolve, reject) => {
 			JWT.verify(
 				refreshToken,
 				process.env.REFRESH_TOKEN_KEY,
 				(err, payload) => {
 					if (err) return reject(createError.Unauthorized());
-					const userId = payload.aud;
 
-					client.GET(userId, (err, response) => {
-						if (err) {
-							console.log(err);
-							reject(createError.InternalServerError());
-							return;
-						}
-						if (refreshToken === resolve) {
-							return resolve(userId);
-						}
-						reject(createError.Unauthorized());
-					});
+					const userId = payload.aud;
 
 					resolve(userId);
 				}
 			);
+		});
+	},
+
+	tryToFindRefreshToken: (userId) => {
+		return new Promise((resolve, reject) => {
+			const rtdb = RefreshToken.findOne({ userId });
+			resolve(rtdb);
 		});
 	},
 };

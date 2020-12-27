@@ -1,35 +1,42 @@
 GET  https://dietappreact.herokuapp.com/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODYxNTEsImV4cCI6MTYwODI4NjE2NiwiYXVkIjoiNWZkYzdmYzZkNjczNzUwMDE3MmFlZGJjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.IVDbpE_In0M1A-1EoBu4mz1Da8Ej5XzPPtzRG16o4Nw
-###Login
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoib2siLCJpYXQiOjE2MDkxMDM5ODAsImV4cCI6MTYwOTEwMzk5NSwiYXVkIjoiNWZlOGY5ZDliNmNkYTA1OTU4MTZlMDBkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.tv2W_Myl93umx4nHFEGwFsVxrFOPpYF7yLW9FNKy8PQ
+###Login OK
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "test@gmail.com",
+    "email": "1@1.com",
     "password": "password11"
 }
 
 
-###Register
+###Register OK
 POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
-    "email": "test@gmail.com",
+    "email": "2@1.com",
     "password": "password11"
 }
 
 ###Refresh token
-POST https://dietappreact.herokuapp.com/auth/refresh-token
+POST http://localhost:8080/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgyODYxNTEsImV4cCI6MTYzOTg0Mzc1MSwiYXVkIjoiNWZkYzdmYzZkNjczNzUwMDE3MmFlZGJjIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.kxPzWeSTFLMAhqj7zPmSuvac3v7lY4wV2GsiJ2bGzs4"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDkxMDk5NDUsImV4cCI6MTYwOTcxNDc0NSwiYXVkIjoiNWZlOTBlY2Q2N2JlYjUyY2QwZmFmOGY3IiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.bQd36fFv6DstdXGZUf6svDAOll346LHVD0oAjUPw55I"
 }
-###Logout
-DELETE https://dietappreact.herokuapp.com/auth/logout
+
+###
+GET http://localhost:8080/token/alltokens
+
+
+
+
+###Logout  OK front->remove accesToken
+DELETE http://localhost:8080/auth/logout
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDc5ODc5NTksImV4cCI6MTYzOTU0NTU1OSwiYXVkIjoiNWZkNTUxZjk4MWY1ZWYzZmZjMGM0M2YxIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.8WsUoIhPS_Ij7tb-bj0Au0SyfgtiZGYvkLNN4oN9jPM"
+    "userId":"5fe90ecd67beb52cd0faf8f7"
 }
