@@ -15,8 +15,9 @@ POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
-    "email": "2@1.com",
+    "email": "newrefresh@1.com",
     "password": "password11"
+    
 }
 
 ###Refresh token
@@ -39,4 +40,15 @@ Content-Type: application/json
 
 {
     "userId":"5fe90ecd67beb52cd0faf8f7"
+}
+
+
+###nested refresh tokens
+POST http://localhost:8080/auth/newR
+Content-Type: application/json
+
+{
+    "email": "test221@example.com",
+    "password": "123",
+    "refreshToken": "2121"
 }

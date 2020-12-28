@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const User = require("../Models/User.schema");
+const Refresh = require("../Models/RefreshToken.schema");
 const { authSchema } = require("../helpers/validation_schema_user");
 const {
 	signAccessToken,
@@ -13,7 +14,6 @@ const {
 	addToken,
 	removeToken,
 } = require("../helpers/refresh_token");
-
 const register = async (req, res, next) => {
 	try {
 		const result = await authSchema.validateAsync(req.body);
@@ -21,17 +21,24 @@ const register = async (req, res, next) => {
 		const doesExist = await User.findOne({ email: result.email });
 		if (doesExist)
 			throw createError.Conflict(`${result.email} is already been registered`);
+		const newUser = new User(result);
+		const savedUser = await newUser.save();
 
-		const user = new User(result);
-		const savedUser = await user.save();
 		const accessToken = await signAccessToken(savedUser.id);
 		const refreshToken = await signRefreshToken(savedUser.id);
 
-		addToken(user.id, refreshToken);
+		const newRefresh = new Refresh({
+			userId: newUser.id,
+			refreshToken: refreshToken,
+		});
+		await newRefresh.save();
+		await newUser.refToken.push(newRefresh);
+		await newUser.save();
+		console.log({ newUser, newRefresh });
 
-		res.send({ accessToken, refreshToken, userId: user.id });
+		res.send({ accessToken, refreshToken });
 	} catch (error) {
-		if (error.isJoi === true) error.status = 422;
+		if (error.isJoi) error.status = 422;
 		next(error);
 	}
 };
