@@ -15,7 +15,11 @@ POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
+<<<<<<< HEAD
     "email": "newrefresh1@1.com",
+=======
+    "email": "newrefresh@1.com",
+>>>>>>> 23a50ae428e33e902bbb495e88585fdfd974e898
     "password": "password11"
     
 }
