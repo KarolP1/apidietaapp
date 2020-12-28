@@ -52,8 +52,11 @@ const login = async (req, res, next) => {
 			throw createError.Unauthorized("Email lub hasło są nie poprawne");
 
 		const accessToken = await signAccessToken(user.id);
+
 		const refreshToken = await signRefreshToken(user.id);
+
 		const refreshTokenInBase = await tryToFindRefreshToken(user.id);
+
 		if (refreshTokenInBase) {
 			editToken(user.id, refreshToken);
 		} else {

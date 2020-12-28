@@ -1,11 +1,11 @@
 GET  https://dietappreact.herokuapp.com/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoib2siLCJpYXQiOjE2MDkxMDM5ODAsImV4cCI6MTYwOTEwMzk5NSwiYXVkIjoiNWZlOGY5ZDliNmNkYTA1OTU4MTZlMDBkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.tv2W_Myl93umx4nHFEGwFsVxrFOPpYF7yLW9FNKy8PQ
-###Login OK
+###Login OKa
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "1@1.com",
+    "email": "newrefresh@1.com",
     "password": "password11"
 }
 
@@ -15,8 +15,9 @@ POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
-    "email": "2@1.com",
+    "email": "newrefresh1@1.com",
     "password": "password11"
+    
 }
 
 ###Refresh token
@@ -24,13 +25,9 @@ POST http://localhost:8080/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDkxMDk5NDUsImV4cCI6MTYwOTcxNDc0NSwiYXVkIjoiNWZlOTBlY2Q2N2JlYjUyY2QwZmFmOGY3IiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.bQd36fFv6DstdXGZUf6svDAOll346LHVD0oAjUPw55I"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDkxNTY5NzIsImV4cCI6MTYwOTc2MTc3MiwiYXVkIjoiNWZlOWM5Njg4YmQ3YzI0ZWYwNDNhMmNkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.U1IF68mkJH0dwy96oYniQrddTbR2zFEIi2eZ-_xrIkQ",
+  "userId": "5fe9c9688bd7c24ef043a2cd"
 }
-
-###
-GET http://localhost:8080/token/alltokens
-
-
 
 
 ###Logout  OK front->remove accesToken
@@ -38,5 +35,16 @@ DELETE http://localhost:8080/auth/logout
 Content-Type: application/json
 
 {
-    "userId":"5fe90ecd67beb52cd0faf8f7"
+    "userId":"5fe9c9688bd7c24ef043a2cd"
+}
+
+
+###nested refresh tokens
+POST http://localhost:8080/auth/newR
+Content-Type: application/json
+
+{
+    "email": "test221@example.com",
+    "password": "123",
+    "refreshToken": "2121"
 }
