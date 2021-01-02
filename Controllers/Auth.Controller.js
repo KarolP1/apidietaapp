@@ -110,15 +110,14 @@ const refreshToken = async (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
-	const { userId } = req.body;
+	const user = req.cookies.userId;
 	try {
-		if (!userId) throw createError.BadRequest;
-		removeToken(userId);
+		if (!user) throw createError.BadRequest;
+		clearCookies(res);
 	} catch (error) {
 		next(error);
 	}
-	clearCookies(res);
-	res.send({ message: `${userId} removed ` });
+	res.send({ message: `${user} removed ` });
 };
 const clearCookies = (res) => {
 	res.cookie("accesToken", "", { maxAge: 0 });

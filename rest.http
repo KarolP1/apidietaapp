@@ -35,9 +35,9 @@ Content-Type: application/json
 ###Logout  OK front->remove accesToken
 DELETE http://localhost:8080/auth/logout
 Content-Type: application/json
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDk2MDA0MjEsImV4cCI6MTYxMDIwNTIyMSwiYXVkIjoiNWZmMDM3NjFhNGE1N2UyYjQ4MTI5ZTAzIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.s92s9HkoepzyYI3jirYTsS3oKw18__PRtEZt-COd_T8; Max-Age=604800; Path=/; Expires=Sat, 09 Jan 2021 15:13:41 GMT,accesToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoib2siLCJpYXQiOjE2MDk2MDA0MjEsImV4cCI6MTYwOTYwMTAyMSwiYXVkIjoiNWZmMDM3NjFhNGE1N2UyYjQ4MTI5ZTAzIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.DffhzpzkK07ucIU1Ec7tTVjcm2jKrNundSVynEFV4cs; Max-Age=600; Path=/; Expires=Sat, 02 Jan 2021 15:23:41 GMT,userId=5ff03761a4a57e2b48129e03; Max-Age=604800; Path=/; Expires=Sat, 09 Jan 2021 15:13:41 GMT
 
 {
-    "userId":"5fe9c9688bd7c24ef043a2cd"
 }
 
 
