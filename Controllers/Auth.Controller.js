@@ -27,18 +27,15 @@ const register = async (req, res, next) => {
 		const accessToken = await signAccessToken(savedUser.id);
 		const refreshToken = await signRefreshToken(savedUser.id);
 
-		const newRefresh = new Refresh({
-			userId: newUser.id,
-			refreshToken: refreshToken,
-		});
-		await newRefresh.save();
-		await newUser.refToken.push(newRefresh);
-		await newUser.save();
-		console.log({ newUser, newRefresh });
+		addToken(user.id, refreshToken);
+		addCookies(res, refreshToken, accessToken, user.id);
+
 
 		res.send({ accessToken, refreshToken });
 	} catch (error) {
-		if (error.isJoi) error.status = 422;
+		if (error.isJoi === true) error.status = 422;
+		clearCookies(res);
+
 		next(error);
 	}
 };
@@ -69,11 +66,19 @@ const login = async (req, res, next) => {
 		} else {
 			addToken(user.id, refreshToken);
 		}
+		addCookies(res, refreshToken, accessToken, user.id);
 
-		res.send({ accessToken, refreshToken, userId: user.id });
+		res.send({
+			accessToken,
+			refreshToken,
+			userId: user.id,
+			M: req.headers.cookie,
+		});
 	} catch (error) {
-		if (error.isJoi)
+		if (error.isJoi) {
 			return next(createError.BadRequest("Email lub hasło są nie poprawne"));
+		}
+		clearCookies(res);
 		next(error);
 	}
 };
@@ -92,9 +97,15 @@ const refreshToken = async (req, res, next) => {
 		} else {
 			await addToken(userId, refresh);
 		}
-
-		res.send({ accessToken: acces, refreshToken: refresh, userId: userId });
+		addCookies(res, refresh, acces, userId);
+		res.send({
+			accessToken: acces,
+			refreshToken: refresh,
+			userId: userId,
+			Cookies: req.cookie,
+		});
 	} catch (err) {
+		clearCookies(res);
 		next(err);
 	}
 };
@@ -107,7 +118,23 @@ const logout = async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
+	clearCookies(res);
 	res.send({ message: `${userId} removed ` });
+};
+const clearCookies = (res) => {
+	res.cookie("accesToken", "", { maxAge: 0 });
+	res.cookie("refreshToken", "", { maxAge: 0 });
+	res.cookie("userId", "", { maxAge: 0 });
+};
+
+const addCookies = (res, refresh, acces, userId) => {
+	try {
+		res.cookie("refreshToken", refresh, { maxAge: 604800000 });
+		res.cookie("accesToken", acces, { maxAge: 600000 });
+		res.cookie("userId", userId, { maxAge: 604800000 });
+	} catch {
+		(err) => console.log(err);
+	}
 };
 
 module.exports = {
