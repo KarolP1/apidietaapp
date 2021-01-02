@@ -29,9 +29,13 @@ const register = async (req, res, next) => {
 
 		addToken(user.id, refreshToken);
 
+		res.cookie("refreshToken", refreshToken);
+		res.cookie("accesToken", accessToken);
 		res.send({ accessToken, refreshToken, userId: user.id });
 	} catch (error) {
 		if (error.isJoi === true) error.status = 422;
+		res.cookie("refreshToken", "", { maxAge: 0 });
+		res.cookie("accesToken", "", { maxAge: 0 });
 		next(error);
 	}
 };
@@ -54,16 +58,21 @@ const login = async (req, res, next) => {
 		const accessToken = await signAccessToken(user.id);
 		const refreshToken = await signRefreshToken(user.id);
 		const refreshTokenInBase = await tryToFindRefreshToken(user.id);
+
 		if (refreshTokenInBase) {
 			editToken(user.id, refreshToken);
 		} else {
 			addToken(user.id, refreshToken);
 		}
-
+		res.cookie("refreshToken", refreshToken);
+		res.cookie("accesToken", accessToken);
 		res.send({ accessToken, refreshToken, userId: user.id });
 	} catch (error) {
-		if (error.isJoi)
+		if (error.isJoi) {
 			return next(createError.BadRequest("Email lub hasło są nie poprawne"));
+		}
+		res.cookie("refreshToken", "", { maxAge: 0 });
+		res.cookie("accesToken", "", { maxAge: 0 });
 		next(error);
 	}
 };
@@ -82,9 +91,13 @@ const refreshToken = async (req, res, next) => {
 		} else {
 			await addToken(userId, refresh);
 		}
+		res.cookie("refreshToken", refresh, { maxAge: 0 });
+		res.cookie("accesToken", acces, { maxAge: 0 });
 
 		res.send({ accessToken: acces, refreshToken: refresh, userId: userId });
 	} catch (err) {
+		res.cookie("refreshToken", "", { maxAge: 0 });
+		res.cookie("accesToken", "", { maxAge: 0 });
 		next(err);
 	}
 };
@@ -97,6 +110,8 @@ const logout = async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
+	res.cookie("refreshToken", "", { maxAge: 0 });
+	res.cookie("accesToken", "", { maxAge: 0 });
 	res.send({ message: `${userId} removed ` });
 };
 
