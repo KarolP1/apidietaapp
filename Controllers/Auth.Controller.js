@@ -61,6 +61,11 @@ const login = async (req, res, next) => {
 			addToken(user.id, refreshToken);
 		}
 		addCookies(res, refreshToken, accessToken, user.id);
+		res.cookie("dupa", refreshToken, {
+			maxAge: 604800000,
+			sameSite: true,
+			secure: true,
+		});
 
 		res.send({
 			accessToken,
