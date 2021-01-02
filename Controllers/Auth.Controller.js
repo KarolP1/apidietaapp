@@ -61,11 +61,6 @@ const login = async (req, res, next) => {
 			addToken(user.id, refreshToken);
 		}
 		addCookies(res, refreshToken, accessToken, user.id);
-		res.cookie("dupa", refreshToken, {
-			maxAge: 604800000,
-			sameSite: true,
-			secure: true,
-		});
 
 		res.send({
 			accessToken,
@@ -131,7 +126,11 @@ const clearCookies = (res) => {
 
 const addCookies = (res, refresh, acces, userId) => {
 	try {
-		res.cookie("refreshToken", refresh, { maxAge: 604800000 });
+		res.cookie("refreshToken", refresh, {
+			maxAge: 604800000,
+			sameSite: true,
+			secure: true,
+		});
 		res.cookie("accesToken", acces, { maxAge: 600000 });
 		res.cookie("userId", userId, { maxAge: 604800000 });
 	} catch {
