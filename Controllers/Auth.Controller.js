@@ -28,14 +28,13 @@ const register = async (req, res, next) => {
 		const refreshToken = await signRefreshToken(savedUser.id);
 
 		addToken(user.id, refreshToken);
+		addCookies(res, refreshToken, accessToken, user.id);
 
-		res.cookie("refreshToken", refreshToken);
-		res.cookie("accesToken", accessToken);
 		res.send({ accessToken, refreshToken, userId: user.id });
 	} catch (error) {
 		if (error.isJoi === true) error.status = 422;
-		res.cookie("refreshToken", "", { maxAge: 0 });
-		res.cookie("accesToken", "", { maxAge: 0 });
+		clearCookies(res);
+
 		next(error);
 	}
 };
@@ -64,15 +63,20 @@ const login = async (req, res, next) => {
 		} else {
 			addToken(user.id, refreshToken);
 		}
-		res.cookie("refreshToken", refreshToken);
-		res.cookie("accesToken", accessToken);
-		res.send({ accessToken, refreshToken, userId: user.id });
+		res.cookie("token", "refreshToken", { secure: true });
+		addCookies(res, refreshToken, accessToken, user.id);
+
+		res.send({
+			accessToken,
+			refreshToken,
+			userId: user.id,
+			M: req.headers.cookie,
+		});
 	} catch (error) {
 		if (error.isJoi) {
 			return next(createError.BadRequest("Email lub hasło są nie poprawne"));
 		}
-		res.cookie("refreshToken", "", { maxAge: 0 });
-		res.cookie("accesToken", "", { maxAge: 0 });
+		clearCookies(res);
 		next(error);
 	}
 };
@@ -91,13 +95,15 @@ const refreshToken = async (req, res, next) => {
 		} else {
 			await addToken(userId, refresh);
 		}
-		res.cookie("refreshToken", refresh, { maxAge: 0 });
-		res.cookie("accesToken", acces, { maxAge: 0 });
-
-		res.send({ accessToken: acces, refreshToken: refresh, userId: userId });
+		addCookies(res, refresh, acces, userId);
+		res.send({
+			accessToken: acces,
+			refreshToken: refresh,
+			userId: userId,
+			Cookies: req.cookie,
+		});
 	} catch (err) {
-		res.cookie("refreshToken", "", { maxAge: 0 });
-		res.cookie("accesToken", "", { maxAge: 0 });
+		clearCookies(res);
 		next(err);
 	}
 };
@@ -110,9 +116,23 @@ const logout = async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
-	res.cookie("refreshToken", "", { maxAge: 0 });
-	res.cookie("accesToken", "", { maxAge: 0 });
+	clearCookies(res);
 	res.send({ message: `${userId} removed ` });
+};
+const clearCookies = (res) => {
+	res.cookie("accesToken", "", { maxAge: 0 });
+	res.cookie("refreshToken", "", { maxAge: 0 });
+	res.cookie("userId", "", { maxAge: 0 });
+};
+
+const addCookies = (res, refresh, acces, userId) => {
+	try {
+		res.cookie("refreshToken", refresh, { maxAge: 604800000 });
+		res.cookie("accesToken", acces, { maxAge: 600000 });
+		res.cookie("userId", userId, { maxAge: 604800000 });
+	} catch {
+		(err) => console.log(err);
+	}
 };
 
 module.exports = {
