@@ -128,11 +128,19 @@ const addCookies = (res, refresh, acces, userId) => {
 	try {
 		res.cookie("refreshToken", refresh, {
 			maxAge: 604800000,
-			sameSite: true,
+			sameSite: "Lax",
 			secure: true,
 		});
-		res.cookie("accesToken", acces, { maxAge: 600000 });
-		res.cookie("userId", userId, { maxAge: 604800000 });
+		res.cookie("accesToken", acces, {
+			maxAge: 600000,
+			sameSite: "Lax",
+			secure: true,
+		});
+		res.cookie("userId", userId, {
+			maxAge: 604800000,
+			sameSite: "Lax",
+			secure: true,
+		});
 	} catch {
 		(err) => console.log(err);
 	}
