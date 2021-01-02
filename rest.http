@@ -1,11 +1,11 @@
 GET  https://dietappreact.herokuapp.com/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoib2siLCJpYXQiOjE2MDkxMDM5ODAsImV4cCI6MTYwOTEwMzk5NSwiYXVkIjoiNWZlOGY5ZDliNmNkYTA1OTU4MTZlMDBkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.tv2W_Myl93umx4nHFEGwFsVxrFOPpYF7yLW9FNKy8PQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoib2siLCJpYXQiOjE2MDkxNTgxNjksImV4cCI6MTYwOTE1ODc2OSwiYXVkIjoiNWZlOWNlMTIwZGQwMzUzYWE0YjQ5MjNkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.5gx4z7tfE74LSQ5ILCqpr9s4TCf9CXCaLv2g3cH7oJU
 ###Login OKa
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "email": "newrefresh3@1.com",
+    "email": "cookie1@1.com",
     "password": "password11"
 }
 
@@ -15,7 +15,7 @@ POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
-    "email": "newrefresh3@1.com",
+    "email": "cookie1@1.com",
     "password": "password11"
     
 }
@@ -25,8 +25,7 @@ POST http://localhost:8080/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDkxNTY5NzIsImV4cCI6MTYwOTc2MTc3MiwiYXVkIjoiNWZlOWM5Njg4YmQ3YzI0ZWYwNDNhMmNkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.U1IF68mkJH0dwy96oYniQrddTbR2zFEIi2eZ-_xrIkQ",
-  "userId": "5fe9c9688bd7c24ef043a2cd"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDkxNTgxNjksImV4cCI6MTYwOTc2Mjk2OSwiYXVkIjoiNWZlOWNlMTIwZGQwMzUzYWE0YjQ5MjNkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.yzxuhi6bi1tyR-62RpARFYK_sfUdDmctReQvWiuIpZg"
 }
 
 
