@@ -27,9 +27,8 @@ const register = async (req, res, next) => {
 		const accessToken = await signAccessToken(savedUser.id);
 		const refreshToken = await signRefreshToken(savedUser.id);
 
-		addToken(user.id, refreshToken);
-		addCookies(res, refreshToken, accessToken, user.id);
-
+		addToken(savedUser.id, refreshToken);
+		addCookies(res, refreshToken, accessToken, savedUser.id);
 
 		res.send({ accessToken, refreshToken });
 	} catch (error) {

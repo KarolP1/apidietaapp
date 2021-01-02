@@ -16,7 +16,7 @@ POST http://localhost:8080/auth/register
 Content-Type:application/json
 
 {
-    "email": "cookie1@1.com",
+    "email": "fix@1.com",
     "password": "password11"
     
 }
@@ -26,7 +26,7 @@ POST http://localhost:8080/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDkxNTgxNjksImV4cCI6MTYwOTc2Mjk2OSwiYXVkIjoiNWZlOWNlMTIwZGQwMzUzYWE0YjQ5MjNkIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.yzxuhi6bi1tyR-62RpARFYK_sfUdDmctReQvWiuIpZg"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDk1OTk0NDAsImV4cCI6MTYxMDIwNDI0MCwiYXVkIjoiNWZmMDM3NjFhNGE1N2UyYjQ4MTI5ZTAzIiwiaXNzIjoiaHR0cDovL2RpZXRhbm90ZS5uZXRsaWZ5LmFwcC8ifQ.bjlSaZusSnZtB7gN6wnEshxqV3szBSqqc8fBMfMnG9E",
 "userId": "5fe9c9688bd7c24ef043a2cd"
 
 }
