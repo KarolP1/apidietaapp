@@ -3,12 +3,20 @@ const morgan = require("morgan");
 const createError = require("http-errors");
 require("dotenv").config();
 require("./helpers/init_mongodb");
-require("./helpers/init_redis");
 const { verifyAccessToken } = require("./helpers/jwt_helper");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-const AuthRoute = require("./Routes/Auth.route");
+const AuthRoute = require("./routes/Auth.route");
 
 const app = express();
+app.use(
+	cors({
+		credentials: true,
+		origin: "*",
+	})
+);
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
