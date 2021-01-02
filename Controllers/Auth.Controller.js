@@ -1,6 +1,5 @@
 const createError = require("http-errors");
 const User = require("../Models/User.schema");
-const Refresh = require("../Models/RefreshToken.schema");
 const { authSchema } = require("../helpers/validation_schema_user");
 const {
 	signAccessToken,
@@ -9,11 +8,7 @@ const {
 	tryToFindRefreshToken,
 } = require("../helpers/jwt_helper");
 
-const {
-	editToken,
-	addToken,
-	removeToken,
-} = require("../helpers/refresh_token");
+const { editToken, addToken } = require("../helpers/refresh_token");
 const register = async (req, res, next) => {
 	try {
 		const result = await authSchema.validateAsync(req.body);
@@ -71,7 +66,6 @@ const login = async (req, res, next) => {
 			accessToken,
 			refreshToken,
 			userId: user.id,
-			M: req.headers.cookie,
 		});
 	} catch (error) {
 		if (error.isJoi) {
@@ -119,10 +113,15 @@ const logout = async (req, res, next) => {
 	}
 	res.send({ message: `${user} removed ` });
 };
+
 const clearCookies = (res) => {
-	res.cookie("accesToken", "", { maxAge: 0 });
-	res.cookie("refreshToken", "", { maxAge: 0 });
-	res.cookie("userId", "", { maxAge: 0 });
+	try {
+		res.cookie("accesToken", "", { maxAge: 0 });
+		res.cookie("refreshToken", "", { maxAge: 0 });
+		res.cookie("userId", "", { maxAge: 0 });
+	} catch (error) {
+		if (error) throw createError.BadRequest("user is not logged in.");
+	}
 };
 
 const addCookies = (res, refresh, acces, userId) => {
