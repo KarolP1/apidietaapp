@@ -63,7 +63,6 @@ const login = async (req, res, next) => {
 		} else {
 			addToken(user.id, refreshToken);
 		}
-		res.cookie("token", "refreshToken", { secure: true });
 		addCookies(res, refreshToken, accessToken, user.id);
 
 		res.send({
